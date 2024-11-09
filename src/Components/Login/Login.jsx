@@ -20,6 +20,15 @@ const Login = () => {
       return;
     }
 
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    if (!regex.test(password)) {
+      setErrorMessage(
+        "Password must be containe one char, one number, one special char"
+      );
+      return;
+    }
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result.user);
