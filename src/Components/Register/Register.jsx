@@ -1,9 +1,22 @@
-import React from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "../Firebase/Firebase.init";
 
 const Register = () => {
   const handleRegister = (event) => {
     event.preventDefault();
-    console.log(event.target.email.value);
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(email, password);
+
+    // create email and password
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        // console.log("ERROR", error);
+      });
   };
   return (
     <div className="max-w-lg mx-auto">
@@ -40,10 +53,15 @@ const Register = () => {
               clipRule="evenodd"
             />
           </svg>
-          <input type="password" className="grow" value="password" />
+          <input
+            type="password"
+            name="password"
+            className="grow"
+            placeholder="password"
+          />
         </label>
 
-        <button className="btn btn-accent btn-wide my-8">Submit</button>
+        <button className="btn btn-accent btn-wide my-8">Login</button>
       </form>
     </div>
   );
