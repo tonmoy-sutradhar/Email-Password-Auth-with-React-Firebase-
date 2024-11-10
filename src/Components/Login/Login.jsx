@@ -4,6 +4,7 @@ import auth from "../Firebase/Firebase.init";
 import { IoEyeSharp } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -118,12 +119,23 @@ const Login = () => {
           {errorMessage}
         </p>
       )}
+
       {success && (
         <p className="text-xl text-green-600 ml-28">
           Sing Up Successfully. Hurray..!!!
           {/* {toast.success("Sign Up successfully")} */}
         </p>
       )}
+
+      <p className="text-blue-500 font-thin ml-32 ">
+        Already have an Account Please{" "}
+        <Link
+          className="text-blue-700 text-sm font-bold border-b-2 border-blue-700"
+          to="/login"
+        >
+          Login
+        </Link>
+      </p>
     </div>
   );
 };

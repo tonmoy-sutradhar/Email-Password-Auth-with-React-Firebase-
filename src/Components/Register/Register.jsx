@@ -20,7 +20,7 @@ const Register = () => {
   };
   return (
     <div className="max-w-lg mx-auto">
-      <h1 className="text-2xl font-bold text-purple-600">Register</h1>
+      <h1 className="text-5xl font-bold text-purple-600">Register</h1>
       <form onSubmit={handleRegister}>
         <label className="input input-bordered flex items-center gap-2 my-8">
           <svg
