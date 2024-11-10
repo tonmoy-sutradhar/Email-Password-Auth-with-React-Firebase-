@@ -1,4 +1,7 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import auth from "../Firebase/Firebase.init";
 import { IoEyeSharp } from "react-icons/io5";
@@ -44,6 +47,11 @@ const Login = () => {
       .then((result) => {
         console.log(result.user);
         setSuccess(true);
+
+        // send email varificaiton
+        sendEmailVerification(auth.currentUser).then(() => {
+          console.log("Email verificaiton sent");
+        });
       })
       .catch((error) => {
         console.log("ERROR", error.message);
