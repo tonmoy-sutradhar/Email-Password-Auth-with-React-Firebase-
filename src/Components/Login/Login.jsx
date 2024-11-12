@@ -9,6 +9,8 @@ import { IoMdEyeOff } from "react-icons/io";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
+// This is SIGN-UP
+
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
@@ -98,10 +100,7 @@ const Login = () => {
             )}
           </button>
           <label className="label">
-            <a
-              href="#"
-              className="label-text-alt link link-hover text-purple-600"
-            >
+            <a href="#" className="label-text-alt link link-hover">
               Forgot password?
             </a>
           </label>

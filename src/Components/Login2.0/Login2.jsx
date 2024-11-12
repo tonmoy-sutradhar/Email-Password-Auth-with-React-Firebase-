@@ -1,11 +1,17 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import auth from "../Firebase/Firebase.init";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+
+// This is Login page
 
 const Login2 = () => {
   const [successfull, setSuccessFull] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const emailRef = useRef();
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -31,6 +37,24 @@ const Login2 = () => {
         setLoginError(error.message);
       });
   };
+
+  const handleForgotPass = () => {
+    console.log("Getting a email......!", emailRef.current.value);
+    const email = emailRef.current.value;
+    if (!email) {
+      console.log("Please provide a valid email address");
+    } else {
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          alert("Password reset email sent, Please check your email");
+          console.log("Reset password");
+        })
+        .catch((error) => {
+          console.log("ERROR IN FORGOT PASS", error);
+        });
+    }
+  };
+
   return (
     <div className="max-w-lg rounded-2xl   mx-auto shadow-2xl">
       <form onSubmit={handleLogin} className="card-body py-12">
@@ -42,6 +66,7 @@ const Login2 = () => {
           <input
             type="email"
             name="email"
+            ref={emailRef}
             placeholder="email"
             className="input input-bordered"
             required
@@ -58,8 +83,11 @@ const Login2 = () => {
             className="input input-bordered"
             required
           />
-          <label className="label">
-            <a href="#" className="label-text-alt link link-hover">
+          <label onClick={handleForgotPass} className="label">
+            <a
+              href="#"
+              className="label-text-alt link link-hover  text-purple-600 border-b border-black"
+            >
               Forgot password?
             </a>
           </label>
